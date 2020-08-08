@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Building $ Station Truck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+
+
+<body>
+  <nav class="ui m-container " >
+  <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+    <div class="ui inverted secondary stackable menu ">
+      <img src="../../static/images/logo.png" th:src="@{/images/logo.png}" class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+      <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+        Explore The Delicious World!
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <div class="ui m-container m-padded-tb-massive" style="max-width: 70em !important;">
+    <form action="#" method="GET" th:action="@{/admin/filter}" class="ui form">
+      <div class="three fields">
+        <div class="field">
+          <div class="ui left labeled action input">
+            <label class="ui compact basic label m-blue m-bg-grey">Building Name</label>
+            <select class="ui fluid search dropdown" name="buildingName">
+              <option></option>
+              <option th:each="building : ${buildingList}" th:value="${building.buildingName}" th:text="${building.buildingName}"></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="ui left labeled action input">
+            <label class="ui compact basic label m-blue m-bg-grey">Building Tag</label>
+            <input type="search" name="buildingTag" placeholder="Building Tag(contain)">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="ui left labeled action input">
+            <label class="ui compact basic label m-blue m-bg-grey">Station Name</label>
+            <select class="ui fluid search dropdown" name="stationName">
+              <option></option>
+              <option th:each="station : ${stationList}" th:value="${station.stationName}" th:text="${station.stationName}"></option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+        <div class="field">
+          <div class="ui left labeled action input" style="margin: auto auto; width: 300px">
+            <label class="ui compact basic label m-blue m-bg-grey">Capacity</label>
+            <input type="number" name="minCapacity" placeholder="min staff">
+            <div style="margin: auto auto">
+              ——
+            </div>
+            <input type="number" name="maxCapacity" placeholder="max staff">
+          </div>
+        </div>
+
+
+
+      <div class="field" style="text-align: center">
+        <button class="ui btn-yellow m-blue button" type="submit" style="width: 150px">Filter</button>
+      </div>
+
+    </form>
+
+    <br>
+    <br>
+    <br>
+
+
+    <div id="table-container" style="max-width:800px;">
+      <table class="ui compact m-yellow table" style="text-align: center">
+        <thead>
+        <tr style="text-align: center;">
+          <th style="color: #003057">Building</th>
+          <th style="color: #003057">Tag(s)</th>
+          <th style="color: #003057">Station</th>
+          <th style="color: #003057">Capacity</th>
+          <th style="color: #003057">Food Truck(s)</th>
+          <th style="color: #003057">Delete & Update Building</th>
+          <th style="color: #003057">Delete & Update Station</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="adminBSQuery : ${adminBSQueries}" style="text-align: center">
+
+          <td >
+            <input type="radio" name="selected" checked="" tabindex="0" class="hidden"
+                   th:object="${adminBSQuery}" th:text="${adminBSQuery.buildingName}" >
+          </td>
+          <td th:text="${adminBSQuery.tag}"  >fsda</td>
+          <td th:text="${adminBSQuery.stationName}"  >fweqf</td>
+          <td th:text="${adminBSQuery.capacity}"  >123</td>
+          <td th:text="${adminBSQuery.foodTruckNames}"   >wefq</td>
+          <td style="text-align: center">
+            <a class="ui mini btn-yellow m-blue  button" th:href="@{/admin/deletebuilding(buildingName=${adminBSQuery.buildingName})}"
+               onclick="if (!(confirm('Are you sure you want to delete this building?'))) return false">Delete
+            </a>
+            <a class="ui mini btn-yellow m-blue button" href="#"
+               th:href="@{/admin/updatebuilding(buildingName=${adminBSQuery.buildingName},
+                     buildingTag=${adminBSQuery.tag}, stationName=${adminBSQuery.stationName})}">Update</a>
+          </td>
+
+          <td style="text-align: center">
+            <a class="ui mini btn-yellow m-blue button" th:href="@{/admin/deletestation(stationName=${adminBSQuery.stationName})}"
+               onclick="if (!(confirm('Are you sure you want to delete this station?'))) return false">Delete</a>
+            <a class="ui mini btn-yellow m-blue button" type="updatestation" href="#"
+               th:href="@{/admin/updatestation(stationName=${adminBSQuery.stationName},
+                     capacity=${adminBSQuery.capacity})}">Update</a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+
+      <br>
+
+      <div class="inline" >
+        <a class="ui left float btn-yellow m-blue button" type="Back" href="#" th:href="@{/admin/home}">Back</a>
+        <a class="ui right floated  btn-yellow m-blue button" href="#" th:href="@{/admin/createbuilding}">Create Building</a>
+        <a class="ui right floated  btn-yellow m-blue button" href="#" th:href="@{/admin/createstation}">Create Station</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+<body>
+<nav class="ui m-container " >
+  <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+    <div class="ui inverted secondary stackable menu ">
+      <img th:src=@{../images/logo.png}  class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+      <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+        Explore The Delicious World!
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ui container">
+      <div class="ui middle aligned center aligned grid">
+        <div class="column">
+          <h2 class="ui image header">
+            <div class="content m-yellow">
+              Sign Up
+            </div>
+          </h2>
+          <form class="ui large form" name="myForm" action="#" th:action="@{/registration}" onsubmit="return validateForm()" method="post">
+            <div class="ui segment">
+
+              <div class="require field">
+                <div class="ui left icon input">
+                  <i class="user circle icon"></i>
+                  <input type="text" name="username" placeholder="username">
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class="envelope icon"></i>
+                  <input type="text" name="email" placeholder="email">
+                </div>
+              </div>
+
+              <div class="require field">
+                <div class="ui left icon input">
+                  <i class="address card icon"></i>
+                  <input type="text" name="firstname" placeholder="firstname">
+                </div>
+              </div>
+
+              <div class="require field">
+                <div class="ui left icon input">
+                  <i class="address card icon"></i>
+                  <input type="text" name="lastname" placeholder="lastname">
+                </div>
+              </div>
+
+              <div class="require field">
+                <div class="ui left icon input">
+                  <i class="lock icon"></i>
+                  <input type="password" name="password" placeholder="password">
+                </div>
+              </div>
+
+              <div class="require field">
+                <div class="ui left icon input">
+                  <i class="lock icon"></i>
+                  <input type="password" name="confirmpassword" placeholder="confirm password">
+                </div>
+              </div>
+
+              <div class="require field">
+                <div class="ui left icon input">
+                  <i class="dollar sign icon"></i>
+                  <input type="number" name="balance" placeholder="balance">
+                </div>
+              </div>
+
+              <div class="required field">
+                  <select class="ui dropdown" name="role">
+                    <option value="">Select your role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Manager">Manager</option>
+                  </select>
+              </div>
+
+              <button class="ui fluid large submit btn-yellow button "><span style="color: white !important;">Sign Up</span></button>
+            </div>
+
+            <div class="ui error message"></div>
+            <div class="ui error mini message"></div>
+          </form>
+
+          <div class="ui message">
+            Already have an account?
+            <a href="#" th:href="@{/login}">
+              Sign In
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script>
+      $('.ui.form').form({
+          fields : {
+              username : {
+                  identifier: 'username',
+                  rules: [{
+                      type : 'empty',
+                      prompt: 'Please input username'
+                  }]
+              },
+              firstname : {
+                  identifier: 'firstname',
+                  rules: [{
+                      type : 'empty',
+                      prompt: 'Please input first name'
+                  }]
+              },
+              lastname : {
+                  identifier: 'lastname',
+                  rules: [{
+                      type : 'empty',
+                      prompt: 'Please input last name'
+                  }]
+              },
+              password : {
+                  identifier: 'password',
+                  rules: [{
+                      type : 'empty',
+                      prompt: 'Please input password'
+                  }]
+              },
+              confirmpassword : {
+                  identifier: 'confirmpassword',
+                  rules: [
+                      {
+                          type : 'empty',
+                          prompt: 'Please input password'
+                      }]
+              },
+              balance : {
+                  identifier: 'balance',
+                  rules: [
+                      {
+                          type : 'empty',
+                          prompt: 'Please input balance'
+                      }]
+              },
+          }
+      });
+
+      $('.ui.radio.checkbox')
+        .checkbox()
+      ;
+
+      function validateForm() {
+        var x = document.forms["myForm"]["balance"].value;
+        if (x == "") {
+          alert("Staff");
+          return true;
+        }
+      }
+  </script>
+
+</body>
+</html>

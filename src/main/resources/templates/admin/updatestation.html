@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Building</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+
+<body>
+  <nav class="ui m-container " >
+  <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+    <div class="ui inverted secondary stackable menu ">
+      <img src="../../static/images/logo.png" th:src="@{/images/logo.png}" class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+      <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+        Explore The Delicious World!
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ui container">
+      <div class="ui middle aligned center aligned grid">
+        <div class="column">
+          <form  method="post" action="#" th:action="@{/admin/saveupdatedstation}" class="ui form">
+            <div class="ui segment">
+
+              <div class="required field">
+                <div class="ui left labeled action input">
+                  <label class="ui compact basic label m-blue m-bg-grey">Name</label>
+                  <input type="text" th:value="${stationName}" name="stationName" placeholder="Station Name">
+                </div>
+              </div>
+
+              <div class="required field">
+                <div class="ui left labeled action input">
+                  <label class="ui compact basic label m-blue m-bg-grey">Capacity</label>
+                  <input type="text" name="capacity" th:value="${capacity}" placeholder="Capacity Number">
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="ui left labeled action input">
+                  <label class="ui compact basic label m-blue m-bg-grey">Sponsored Building</label>
+                  <select class="ui fluid search dropdown" name="buildingName">
+                    <option th:each="building : ${available}" th:text="${building.buildingName}"></option>
+                  </select>
+                </div>
+              </div>
+
+
+              <button class="ui fluid large submit btn-yellow button "><span style="color: #003057 !important;">Update</span></button>
+            </div>
+
+            <a class="ui left floated m-bg-grey button" type="Back" href="#" th:href="@{/admin/home}">Back</a>
+            <div class="ui error message"></div>
+            <div class="ui error mini message"></div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<footer></footer>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+  $('.ui.form').form({
+    fields : {
+      name : {
+        identifier: 'stationName',
+        rules: [{
+          type : 'empty',
+          prompt: 'Please input stationname'
+        }]
+      },
+      Capacity : {
+        identifier: 'Capacity',
+        rules: [{
+          type : 'empty',
+          prompt: 'Please input Capacity'
+        }]
+      },
+    }
+  }
+  });
+
+</script>
+</body>
+</html>

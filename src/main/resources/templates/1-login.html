@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+
+  <nav class="ui m-container " >
+    <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+      <div class="ui inverted secondary stackable menu ">
+          <img th:src=@{../images/logo.png}  class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+          <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+            Explore The Delicious World!
+          </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ui container">
+      <div class="ui middle aligned center aligned grid">
+        <div class="column">
+          <h2 class="ui image header">
+            <div class="content m-yellow">
+                Sign In to Your Account
+            </div>
+          </h2>
+          <form class="ui large form" method="post" action="#" th:action="@{/login}">
+            <div class="ui segment">
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class="user circle icon"></i>
+                  <input type="text" name="username" placeholder="username">
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class="lock icon"></i>
+                  <input type="password" name="password" placeholder="password">
+                </div>
+              </div>
+              <button class="ui fluid large submit btn-yellow button "><span style="color: white !important;">Sign In</span></button>
+            </div>
+
+            <div class="ui error message"></div>
+
+            <div class="ui error mini message"></div>
+            <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">
+              wrong username or password
+            </div>
+          </form>
+
+          <div class="ui message">
+            New to us?
+            <a href="#" th:href="@{/registration}">
+              Sign Up
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ui m-container-small" style="width: 600px">
+    <div class="ui success large message">
+      <p style="word-spacing: 1.3px">Welcome to Georgia Tech Food Truck Database Management System!</p>
+      <p style="word-spacing: 1.3px; font-size: 13px">Here are some demo accounts you can use to log in</p>
+      <ul style="font-size: 12px; word-spacing: 1.2px">
+        <li>(Customer) Username: customer1 Password: 1111111111</li>
+        <li>(Manager) Username: doe.jane Password: 22222222200</li>
+        <li>(Admin) Username: Nekonsh Password: 8888888888</li>
+        <li>(Staff) Username: Staff1 Password: 3333333333</li>
+      </ul>
+    </div>
+
+  </div>
+
+
+
+
+  <footer></footer>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script>
+      $('.ui.form').form({
+          fields : {
+              username : {
+                  identifier: 'username',
+                  rules: [{
+                      type : 'empty',
+                      prompt: 'Please input username'
+                  }]
+              },
+              password : {
+                  identifier: 'password',
+                  rules: [{
+                      type : 'empty',
+                      prompt: 'Please input password'
+                  }]
+              }
+          }
+      });
+  </script>
+</body>
+</html>

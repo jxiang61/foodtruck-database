@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>current info</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+
+<body>
+
+
+<nav class="ui m-container " >
+    <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+        <div class="ui inverted secondary stackable menu ">
+            <img th:src=@{../images/logo.png}  class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+            <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+                Explore The Delicious World!
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <br>
+    <br>
+    <br>
+
+    <div style="text-align: center">
+        <div class="two fields m-padded-tb-small">
+            <div class="field">
+                <label class="m-blue" style="font-size: 15px">Station:</label>
+                &nbsp;
+                &nbsp;
+                <span th:text="${cusInfoBasic.stationName}" style="font-size: 13px" class="m-yellow">123</span>
+                <p style="text-decoration: underline;"></p>
+            </div>
+        </div>
+        <div class="two fields m-padded-tb-small">
+            <div class="field">
+                <label class="m-blue" style="font-size: 15px">Building:</label>
+                &nbsp;
+                &nbsp;
+                <span th:text="${cusInfoBasic.stationName}" class="m-yellow" style="font-size: 13px">124</span>
+                <p style="text-decoration: underline;"></p>
+            </div>
+        </div>
+        <div class="two fields m-padded-tb-small">
+            <div class="field">
+                <label class="m-blue" style="font-size: 15px">Building Tag(s):</label>
+                &nbsp;
+                &nbsp;
+                <span th:text="${cusInfoBasic.tags}" style="font-size: 13px" class="m-yellow">1235</span>
+                <p style="text-decoration: underline;"></p>
+            </div>
+        </div>
+        <div class="two fields m-padded-tb-small">
+            <div class="field">
+                <label class="m-blue" style="font-size: 15px">Building Description:</label>
+                &nbsp;
+                &nbsp;
+                <span th:text="${cusInfoBasic.description}" style="font-size: 13px" class="m-yellow">215</span>
+                <p style="text-decoration: underline;"></p>
+            </div>
+        </div>
+        <div class="two fields m-padded-tb-small">
+            <div class="field">
+                <label class="m-blue" style="font-size: 15px" >Balance:</label>
+                &nbsp;
+                &nbsp;
+                <span th:text="${cusInfoBasic.balance}" style="font-size: 13px" class="m-yellow">1235</span>
+                <p style="text-decoration: underline;"></p>
+            </div>
+        </div>
+
+        <br>
+
+        <div id="table-container" style="width:950px; margin:auto auto;">
+            <form class="ui form" th:action="@{/customer/order(userName=${userName})}" method="post">
+                <table class="ui compact m-yellow table">
+                    <thead>
+                    <tr style="text-align: center;">
+                        <th style="color: #003057">Selection</th>
+                        <th style="color: #003057">Food Truck Name</th>
+                        <th style="color: #003057">Manager</th>
+                        <th style="color: #003057">Food(s)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="foodInfo : ${cusInfoFT}" style="text-align: center">
+                        <td>
+                            <input type="radio" name="foodTruckName" checked="" tabindex="0" class="hidden" th:value="${foodInfo.foodTruckName}">
+                            <label></label>
+                        </td>
+                        <td th:text="${foodInfo.foodTruckName}" th:value="${foodInfo.foodTruckName}">stationName</td>
+                        <td th:text="${foodInfo.managerName}" th:value="${foodInfo.managerName}">managerName</td>
+                        <td th:text="${foodInfo.foodNames}" th:value="${foodInfo.foodNames}">foodNames</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+                <div class="field" style="text-align: center">
+                    <button class="ui btn-yellow m-blue button" type="submit" style="width: 150px">Order</button>
+                </div>
+
+                <a class="ui left floated btn-yellow m-grey button" type="Back" href="#" th:href="@{/customer/home(userName=${userName})}">Back</a>
+
+            </form>
+
+            <br>
+            <br>
+            <br>
+
+        </div>
+    </div>
+
+
+
+
+
+<footer></footer>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+
+    $('.ui.checkbox')
+        .checkbox()
+    ;
+
+</script>
+</body>
+</html>

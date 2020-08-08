@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+<nav class="ui m-container " >
+    <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+        <div class="ui inverted secondary stackable menu ">
+            <img th:src=@{../images/logo.png}  class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+            <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+                Explore The Delicious World!
+            </div>
+        </div>
+    </div>
+</nav>
+    <br>
+    <br>
+    <br>
+
+    <div class="ui m-container m-padded-tb-massive" style="max-width: 50em !important;">
+            <div class="ui middle aligned center aligned equal width grid">
+                <div class="column">
+                    <a class="ui fluid btn-yellow m-blue button" href="./explore.html">
+                        Explore Food Trucks
+                    </a>
+                </div>
+                <div class="column">
+                    <a class="ui fluid btn-yellow m-blue button" href="./orderhistory.html">
+                        Order History
+                    </a>
+                </div>
+                <div class="column">
+                    <a class="ui fluid btn-yellow m-blue button" href="./currentinformation.html">
+                        Current Information
+                    </a>
+                </div>
+
+                <div class="equal width row m-padded-tb-massive">
+                    <div class="column">
+                        <a class="ui fluid btn-yellow m-blue button" href="./managefoodtruck.html">
+                            Manage Food Truck
+                        </a>
+                    </div>
+                    <div class="column">
+                        <a class="ui fluid btn-yellow m-blue button " href="./foodtrucksummary.html">
+                            View Food Truck Summary
+                        </a>
+                    </div>
+                </div>
+                <div class="equal width row">
+                    <div class="column">
+                        <a class="ui fluid btn-yellow m-blue button" href="./managebuilding&station.html">
+                            Manage Building & Station
+                        </a>
+                    </div>
+                    <div class="column">
+                        <a class="ui fluid btn-yellow m-blue button" href="./managefood.html">
+                            Manage Food
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+
+
+</body>
+</html>

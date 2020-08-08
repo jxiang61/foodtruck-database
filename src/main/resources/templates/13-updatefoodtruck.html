@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Food Truck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+
+<body>
+    <nav class="ui m-container " >
+    <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+        <div class="ui inverted secondary stackable menu ">
+            <img src="../static/images/logo.png" th:src="@{/images/logo.png}" class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+            <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+                Explore The Delicious World!
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <div class="m-container m-padded-tb-massive" style="max-width: 30em !important;">
+        <div class="ui container">
+            <div class="ui middle aligned center aligned grid">
+                <div class="column">
+                    <form class="ui form" method="post" action="#" th:action="@{/manager/truckupdate}">
+                        <div class="ui segment">
+
+                            <div class="required field">
+                                <div class="ui left labeled action input">
+                                    <label class="ui compact basic label m-blue m-bg-grey">Name</label>
+                                    <input type="text" name="foodTruckName" th:value="${oldTruckName}" placeholder="Food Truck Name">
+                                </div>
+                            </div>
+
+                            <div class="required field">
+                                <div class="ui left labeled action input">
+                                    <label class="ui compact basic label m-blue m-bg-grey">Station</label>
+                                    <select class="ui fluid search dropdown" th:value="${oldStationName}" name="stationName">
+                                        <option th:each="station : ${allstations}" th:text="${station.stationName}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="ui left labeled action input">
+                                    <label class="ui compact basic label m-blue m-bg-grey">Assigned Staff</label>
+                                    <select class="ui fluid search dropdown" name="staffName">
+                                        <option th:each="tempstaff : ${staff}" th:text="${tempstaff.userName}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class=" two fields">
+                                <div class="field">
+                                    <div class="ui left labeled action input">
+                                        <label class="ui compact basic label m-blue m-bg-grey">Food</label>
+                                        <select class="ui fluid search dropdown" name="foodName">
+                                            <option th:each="fooditem : ${foods}" th:text="${fooditem.foodName}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <div class="ui left labeled action input">
+                                        <label class="ui compact basic label m-blue m-bg-grey">Price</label>
+                                        <input type="text" name="price" placeholder="Price">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button class="ui fluid large submit btn-yellow button "><span style="color: #003057 !important;">Update</span></button>
+                        </div>
+
+                        <a class="ui left floated m-bg-grey button" type="Back" href="#" th:href="@{/manager/truckmanagement(userName=${userName})}">Back</a>
+                        <div class="ui error message"></div>
+                        <div class="ui error mini message"></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+  </html>

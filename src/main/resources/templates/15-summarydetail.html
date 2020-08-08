@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>current info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+
+<body>
+
+
+<nav class="ui m-container " >
+  <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+    <div class="ui inverted secondary stackable menu ">
+      <img th:src=@{../images/logo.png}  class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+      <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+        Explore The Delicious World!
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <div class="ui m-container m-padded-tb-massive" style="max-width: 70em !important;">
+    <div class="m-container-small" style="text-align: center">
+      <div class="ui labeled input" style="max-width: 15em !important;">
+        <label class="ui compact basic label m-blue m-bg-grey">Food Truck: </label>
+        <input class="m-bg-grey" type="text" readonly="readonly" name="foodTruckName" th:value="${foodTruckName}"/>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div id="table-container" style="width:950px; margin:auto auto;">
+      <!--th:fragment=list of the filter results-->
+      <table class="ui compact m-yellow table">
+        <thead>
+        <tr style="text-align: center;">
+          <th style="color: #003057">Date</th>
+          <th style="color: #003057">Customer</th>
+          <th style="color: #003057">Total Purchase</th>
+          <th style="color: #003057"># Orders</th>
+          <th style="color: #003057">Food(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="summary : ${summaryDetailList}">
+
+          <td th:text="${summary.date}" />
+          <td th:text="${summary.customerName}" />
+          <td th:text="${summary.totalPurchase}" />
+          <td th:text="${summary.orderCount}" />
+          <td th:text="${summary.foodNames}" />
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <div class="m-container-small" style="text-align: center">
+    <a class="ui btn-yellow m-grey button" type="Back" href="#" th:href="@{/manager/home(userName=${userName})}">Back</a>
+  </div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Food Truck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+
+<body>
+<nav class="ui m-container " >
+    <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+        <div class="ui inverted secondary stackable menu ">
+            <img th:src=@{../images/logo.png}  class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+            <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+                Explore The Delicious World!
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <div class="ui m-container m-padded-tb-massive" style="max-width: 70em !important;">
+        <form action="#" method="GET" th:action="@{/manager/filterfoodtrucksummary}" class="ui form">
+            <div class="three fields">
+                <div class="field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact basic label m-blue m-bg-grey">Food Truck Name (contain)</label>
+                        <input type="text" name="foodTruckName" placeholder="Name">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact basic label m-blue m-bg-grey">Station Name</label>
+                        <select class="ui fluid search dropdown" name="stationName">
+                            <option value="">Please select a station</option>
+                            <option th:each="station : ${stations}" th:text="${station.stationName}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact basic label m-blue m-bg-grey">Sort Direction</label>
+                        <select class="ui fluid search dropdown" name="sortedDirection">
+                            <option value="ASC">ASC</option>
+                            <option value="DESC">DESC</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <div class="ui left labeled action input" style="width:350px">
+                        <label class="ui compact basic label m-blue m-bg-grey">Date</label>
+                        <input type="date" name="minDate" style="width: 90px">
+                        <div style="margin: auto auto">
+                            —
+                        </div>
+                        <input type="date" name="maxDate" style="width: 90px;">
+
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact basic label m-blue m-bg-grey">Sorted By</label>
+                        <select class="ui fluid search dropdown" name="sortedBy">
+                            <option value="foodTruckName">foodTruckName</option>
+                            <option value="totalOrder">totalOrder</option>
+                            <option value="totalRevenue">totalRevenue</option>
+                            <option value="totalCustomer">totalCustomer</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="field" style="text-align: center">
+                <button class="ui btn-yellow m-blue button" type="submit" style="width: 150px">Filter</button>
+            </div>
+
+        </form>
+
+        <br>
+        <br>
+        <br>
+
+
+        <div id="table-container" style="width:950px; margin:auto auto;">
+            <table class="ui compact m-yellow table">
+                <thead>
+                <tr style="text-align: center;">
+                    <th style="color: #003057">Food Truck Name</th>
+                    <th style="color: #003057"># Total Order</th>
+                    <th style="color: #003057">Total Revenue</th>
+                    <th style="color: #003057"># Customer</th>
+                    <th style="color: #003057">View Detail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="summary : ${summaryList}" style="text-align: center">
+                    <td th:text="${summary.foodTruckName}" >xixi</td>
+                    <td th:text="${summary.totalOrder}" /> 20</td>
+                    <td th:text="${summary.totalRevenue}" /> 20</td>
+                    <td th:text="${summary.totalCustomer}" /> 20</td>
+                    <td>
+                        <a class="ui mini btn-yellow m-blue button"
+                           th:href="@{/manager/trucksummarydetail(foodTruckName=${summary.foodTruckName})}">View Detail
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+
+            <div class="inline" >
+                <a class="ui left float btn-yellow m-blue button" type="Back" href="#" th:href="@{/manager/home(userName=${userName})}">Back</a>
+            </div>
+        </div>
+
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+    $('.ui.form').form({
+        fields : {
+            foodtruckname : {
+                identifier: 'foodTruckName',
+                rules: [{
+                    type : 'empty',
+                    prompt: 'Please input foodtruckname'
+                }]
+            },
+            stationname : {
+                identifier: 'stationName',
+                rules: [{
+                    type : 'empty',
+                    prompt: 'Please choose stationname'
+                }]
+            },
+            date : {
+                identifier: 'mindate' "maxdate",
+                rules: [{
+                    type : 'empty',
+                    prompt: 'Please choose min mindate and maxdate'
+                }]
+            },
+
+        }
+    });
+    $('.ui.checkbox')
+        .checkbox()
+    ;
+</script>
+</body>
+</html>

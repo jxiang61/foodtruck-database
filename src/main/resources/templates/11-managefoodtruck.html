@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Food Truck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+
+<body>
+<nav class="ui m-container " >
+  <div class="ui attached segment m-padded-tb-mini m-shadow-small m-bg-grey">
+    <div class="ui inverted secondary stackable menu ">
+      <img th:src=@{../images/logo.png}  class="ui teal header item m-padded-tb-tiny" th:href="@{/}">
+      <div class="m-header" style="font-size: 40px;margin: 50px auto; line-height: 40px">
+        Explore The Delicious World!
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <div class="ui m-container m-padded-tb-massive" style="max-width: 70em !important;">
+    <form class="ui form" method="get" action="#" th:action="@{/manager/filterfoodtruck}">
+      <div class="two fields">
+        <div class="field">
+          <div class="ui left labeled action input">
+            <label class="ui compact basic label m-blue m-bg-grey">Food Truck Name (contain)</label>
+            <input  type="text" name="foodTruckName" placeholder="Food Truck Name">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="ui left labeled action input">
+            <label class="ui compact basic label m-blue m-bg-grey">Station Name</label>
+            <select class="ui fluid search dropdown" name="stationName">
+              <option value="">Please select a station</option>
+              <option th:each="station : ${stations}" th:text="${station.stationName}"></option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <div class="ui left labeled action input">
+            <label class="ui compact basic label m-blue m-bg-grey">Staff Count</label>
+            <input type="number" name="minStaffCount" placeholder="min staff">
+            <div style="margin: auto auto">
+              ——
+            </div>
+            <input type="number" name="maxStaffCount" placeholder="max staff">
+          </div>
+        </div>
+
+        <div class="field" style="margin: auto; text-align: center">
+          <div class="ui checkbox">
+            <input type="checkbox" tabindex="0" class="hidden" name="hasRemainingCapacity">
+            <label class="label m-blue" style="font-size: 15px; font-weight: bold">Has Remaining Capacity</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="text-align: center">
+        <button class="ui btn-yellow m-blue button" type="submit" style="width: 150px">Filter</button>
+      </div>
+
+    </form>
+
+    <br>
+    <br>
+    <br>
+
+
+    <div id="table-container" style="width:950px; margin:auto auto;">
+      <table class="ui compact m-yellow table">
+        <thead>
+          <tr style="text-align: center;">
+            <th style="color: #003057">Food Truck Name</th>
+            <th style="color: #003057">Station Name</th>
+            <th style="color: #003057">Remaining Capacity</th>
+            <th style="color: #003057">Staff</th>
+            <th style="color: #003057">#Menu Item</th>
+            <th style="color: #003057">Update</th>
+            <th style="color: #003057">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="tempTruck : ${trucks}" style="text-align: center">
+
+            <td th:text="${tempTruck.foodTruckName}" ></td>
+            <td th:text="${tempTruck.stationName}" /></td>
+            <td th:text="${tempTruck.remainingCapacity}" /></td>
+            <td th:text="${tempTruck.staffCount}" /></td>
+            <td th:text="${tempTruck.menuItem}" /></td>
+            <td>
+              <a class="ui mini btn-yellow m-blue button" href="#"
+                 th:href="@{/manager/truckupdate(foodTruckName=${tempTruck.foodTruckName},
+                       stationName=${tempTruck.stationName})}">Update</a>
+            </td>
+            <td>
+              <a class="ui mini btn-yellow m-blue button" href="#"
+                 th:href="@{/manager/deletefoodtruck(foodTruckName=${tempTruck.foodTruckName})}"
+                 onclick="if (!(confirm('Are you sure you want to delete this truck?'))) return false">Delete
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+
+      <div class="inline" >
+        <a class="ui left float btn-yellow m-blue button" type="Back" href="#" th:href="@{/manager/home(userName=${userName})}">Back</a>
+        <a class="ui right floated  btn-yellow m-blue button" href="#" th:href="@{/manager/createtruck}">Create</a>
+      </div>
+    </div>
+
+  </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+    $('.ui.form').form({
+        fields : {
+            stationname : {
+
+            },
+            staffcount : {
+                identifier: 'minstaff',
+                rules: [{
+                    type : 'empty',
+                    prompt: 'Please choose min staffcount'
+                }]
+            },
+            to : {
+                identifier: 'maxstaff',
+                rules: [{
+                    type : 'empty',
+                    prompt: 'Please choose max staffcount'
+                }]
+            },
+            terms : {
+                identifier: 'terms',
+                rules: [{
+                    type : 'checked',
+                    prompt: 'It is not necessary to agree'
+                }]
+            }
+      }
+    });
+    $('.ui.checkbox')
+  .checkbox()
+;
+
+</script>
+</body>
+</html>
