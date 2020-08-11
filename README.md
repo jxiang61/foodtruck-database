@@ -22,7 +22,7 @@ https://foodtruck.azurewebsites.net/
  <img src="https://github.com/jxiang61/foodtruck-database/blob/master/demo_image/104.png" margin-right='20px' width="800" align="center"> 
 
 ## Build and  run: 
-1.	Clone and open the project file in IntelliJ
+1.	Clone and open the project file in IntelliJ IDE
 2.	The database should be MySQL v8.0
 3.	Create the database schema and create your own application.yml file
 4.	Run this application in IntelliJ IDE
